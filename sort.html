@@ -1,0 +1,24 @@
+<html>
+    <head >
+        <tittle>Shorting the number Seprate with comm (x,y,z)</tittle>
+    </head>
+    <body>
+        <form action="#" style="margin-top:15px;">
+            <input type="text" id="num" />
+            <button type="submit" id="btn">Short</button>
+            <p id="out"></p>
+        </form>
+
+        <script>
+            const nums  = document.getElementById("num");
+            const btn = document.getElementById("btn");
+            const out   = document.getElementById("out");
+            btn
+            .addEventListener("click", function(ref){
+                ref.preventDefault(); //web page default set
+                let value     = nums.value.split(","); //user input value seprate ,
+                out.innerHTML = value.sort((a,b) => a-b);
+            })
+        </script>
+    </body>
+</html>
