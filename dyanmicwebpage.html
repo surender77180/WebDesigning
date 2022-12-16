@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <title>Registraion form use in js</title>
+</head>
+
+<script type="module">
+    //function display error message
+    function printError(elemId, hintMsg) {
+        document.getElementById(elemId).innerHTML = hintMsg;
+    }
+    function validateForm(eve) {
+        eve.preventDefault();
+        var name = document.contactForm.name.value;
+        var rollno = document.contactForm.rollno.value;
+        var clas = document.contactForm.clas.value;
+        var gender = document.contactForm.gender.value;
+        var mobileno = document.contactForm.mobileno.value;
+
+        var nameErr, rollnoErr, clasErr, genderErr, mobilenoErr;
+        var nameErr = rollnoErr = clasErr = genderErr = mobilenoErr = true;
+        //Validate name
+        if (name == "") {
+            printError("nameErr", "Please enter name");
+        } else {
+            var regex = /^[a-zA-Z\s]+$/;
+            if (!regex.test(name)) {
+                printError("nameErr", "Please enter name");
+            } else {
+                printError("nameErr", "");
+                nameErr = false;
+            }
+        }
+        //Validate rollno
+        if (rollno == "") {
+            printError("rollnoErr", "Please your rollno");
+        } else {
+            var regex = /^[0-9]{12}$/;
+            if (!regex.test(rollno)) {
+                printError("rollnoErr", "Please enter rollno");
+            } else {
+                printError("rollnoErr", "");
+            }
+            rollnoErr = false;
+        }
+        //Validate clas
+        if (clas == "Select") {
+            printError("clasErr", "Please enter class");
+        } else {
+            printError("clasErr", "")
+            clasErr = false;
+        }
+        //Validate gender
+        if (gender == "") {
+            printError("genderErr", "Please enter gender")
+        } else {
+            printError("genderErr", "");
+            genderErr = false;
+        }
+        //Validate mobileno
+        if (mobileno == "") {
+            printError("mobilenoErr", "Please enter mobileno");
+        } else {
+            var regex = /^\d{10}$/;
+            if (regex.test(mobileno)) {
+                printError("mobilenoErr", "");
+                mobilenoErr = false
+            } else {
+                printError("mobilenoErr", "Please enter mobileno");
+            }
+        }
+        //Prevernt form being submitted if there errors
+        if (nameErr || rollnoErr || clasErr || genderErr || mobilenoErr) {
+            return false;
+        } else {
+            var dataPreview = "You entered the following details: \n" +
+                "Full Name: " + name + "\n" +
+                "Roll No: " + rollno + "\n" +
+                "Class: " + clas + "\n" +
+                "Gender: " + gender + "\n" +
+                "Mobile No: " + mobileno + "\n";
+        }
+        alert(dataPreview);
+    }
+    document.contactForm.onsubmit = validateForm;
+</script>
+
+<body>
+    <form action="#" name="contactForm">
+        <h1>Student Registraion Form</h1>
+        <div>
+            <label>Name</label>
+            <input type="text" name="name" />
+            <p id="nameErr"></p>
+        </div><br>
+        <div>
+            <label>RollNo</label>
+            <input type="text" name="rollno" />
+            <p id="rollnoErr"></p>
+        </div><br>
+        <div>
+            <label>Class</label>
+            <select name="clas">
+                <option>MCA-1st</option>
+                <option>MCA-2nd</option>
+            </select>
+            <p id="clasErr"></p>
+        </div><br>
+        <div>
+            <label>Gender</label>
+            <label><input type="radio" name="gender" value="male">Male</label>
+            <label><input type="radio" name="gender" value="female">Female</label>
+            <p id="genderErr"></p>
+        </div><br>
+        <div>
+            <label>Mobile Number</label>
+            <input type="text" name="mobileno" maxlength="10" />
+            <p id="mobilenoErr"></p>
+        </div><br>
+        <div class="row">
+            <input type="Submit" value="Submit" />
+        </div>
+
+    </form>
+</body>
+
+</html>
